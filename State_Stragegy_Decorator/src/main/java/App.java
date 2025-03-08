@@ -5,6 +5,10 @@ import payment.Product;
 import payment.strategyPD.ComsumeTax;
 import payment.strategyPD.SpecialTax;
 import payment.strategyPD.VAT;
+import priceFoodCaculator.Food;
+import priceFoodCaculator.SimpleFood;
+import priceFoodCaculator.decorator.TowelDecorator;
+import priceFoodCaculator.decorator.WaterDecorator;
 
 public class App {
 
@@ -54,12 +58,27 @@ public class App {
         Product product3 = new Product(300, "Ruou", new SpecialTax());
         System.out.println(product3.getName() +  "-" + product3.getPriceWithTax() + " VND");
     }
+
+    public static void dpDemo_Decorator() {
+        Food food = new SimpleFood();
+        System.out.println(food.getDescription() + " - " + food.getCost());
+
+        System.out.println("\n====================================\n");
+
+        food = new WaterDecorator(food);
+        System.out.println(food.getDescription() + " - " + food.getCost());
+
+        System.out.println("\n====================================\n");
+        food = new TowelDecorator(food);
+        System.out.println(food.getDescription() + " - " + food.getCost());
+    }
     public static void main(String[] args) {
 //      noDPDemo();
 
 //      dpDemo_State();
 
-        dpDemo_Strategy();
+//        dpDemo_Strategy();
 
+        dpDemo_Decorator();
     }
 }
