@@ -1,6 +1,10 @@
 import orderManagement.haveDP_State.OrderDP;
 import orderManagement.noDP.Order;
 import orderManagement.noDP.Status;
+import payment.Product;
+import payment.strategyPD.ComsumeTax;
+import payment.strategyPD.SpecialTax;
+import payment.strategyPD.VAT;
 
 public class App {
 
@@ -35,9 +39,27 @@ public class App {
         order2.dangXuLy();
         order2.huy();
     }
-    public static void main(String[] args) {
-//        noDPDemo();
 
-        dpDemo_State();
+    public static void dpDemo_Strategy() {
+        Product product1 = new Product(100, "Nuoc", new ComsumeTax());
+        System.out.println(product1.getName() +  "-" + product1.getPriceWithTax() + " VND");
+
+        System.out.println("\n====================================\n");
+
+        Product product2 = new Product(200, "Dien", new VAT());
+        System.out.println(product2.getName() +  "-" + product2.getPriceWithTax() + " VND");
+
+        System.out.println("\n====================================\n");
+
+        Product product3 = new Product(300, "Ruou", new SpecialTax());
+        System.out.println(product3.getName() +  "-" + product3.getPriceWithTax() + " VND");
+    }
+    public static void main(String[] args) {
+//      noDPDemo();
+
+//      dpDemo_State();
+
+        dpDemo_Strategy();
+
     }
 }
