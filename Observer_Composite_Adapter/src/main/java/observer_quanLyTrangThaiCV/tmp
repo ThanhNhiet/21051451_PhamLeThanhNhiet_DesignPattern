@@ -1,0 +1,73 @@
+// Observer Interface (Team Member)
+interface TeamMember {
+    void update(String taskStatus);
+}
+
+// Concrete Observer (Team Member)
+class ConcreteTeamMember implements TeamMember {
+    private String name;
+
+    public ConcreteTeamMember(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void update(String taskStatus) {
+        System.out.println(name + " nhận được thông báo: Trạng thái công việc là " + taskStatus);
+    }
+}
+
+// Subject Interface (Task)
+interface Task {
+    void registerTeamMember(TeamMember teamMember);
+    void removeTeamMember(TeamMember teamMember);
+    void notifyTeamMembers();
+}
+
+// Concrete Subject (Task)
+class ConcreteTask implements Task {
+    private String taskName;
+    private String status;
+    private List<TeamMember> teamMembers = new ArrayList<>();
+
+    public ConcreteTask(String taskName) {
+        this.taskName = taskName;
+    }
+
+    @Override
+    public void registerTeamMember(TeamMember teamMember) {
+        teamMembers.add(teamMember);
+    }
+
+    @Override
+    public void removeTeamMember(TeamMember teamMember) {
+        teamMembers.remove(teamMember);
+    }
+
+    @Override
+    public void notifyTeamMembers() {
+        for (TeamMember member : teamMembers) {
+            member.update(status);
+        }
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+        notifyTeamMembers();
+    }
+}
+
+// Main class for testing
+public class TaskObserverPattern {
+    public static void main(String[] args) {
+        ConcreteTask task = new ConcreteTask("Phát triển tính năng A");
+        TeamMember member1 = new ConcreteTeamMember("Linh");
+        TeamMember member2 = new ConcreteTeamMember("Hải");
+
+        task.registerTeamMember(member1);
+        task.registerTeamMember(member2);
+
+        task.setStatus("Đang thực hiện");  // Trạng thái công việc thay đổi, thành viên nhóm nhận thông báo
+        task.setStatus("Hoàn thành");      // Trạng thái công việc thay đổi, thành viên nhóm nhận thông báo
+    }
+}
