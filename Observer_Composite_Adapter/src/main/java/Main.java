@@ -1,3 +1,4 @@
+import adapter_xmlNjson.*;
 import composite_folderNfile.File;
 import composite_folderNfile.Folder;
 import observer_coPhieu.ConcreteInvestor;
@@ -55,10 +56,24 @@ public class Main {
         rootFolder.display();
     }
 
+    public static void AdapterPattern() {
+        XmlProcessor xmlProcessor = new XmlProcessor();
+        JSonProcessor jsonProcessor = new JSonProcessor();
+        
+        DataAdapter xmlToJsonAdapter = new Xml2JSonAdapter(xmlProcessor);
+        DataAdapter jsonToXmlAdapter = new JSon2XmlApdater(jsonProcessor);
+
+        String xmlData = "<data>xml</data>";
+        System.out.println("JSON data: " + xmlToJsonAdapter.convert(xmlData));
+
+        String jsonData = "{ \"data\":\"json\" }";
+        System.out.println("XML data: " + jsonToXmlAdapter.convert(jsonData));
+    }
+
     public static void main(String[] args) {
 //        CoPhieu_ObserverPattern();
-
 //        QLtrangThaiCV_ObserverPartern();
-        CompositePattern();
+//        CompositePattern();
+        AdapterPattern();
     }
 }
