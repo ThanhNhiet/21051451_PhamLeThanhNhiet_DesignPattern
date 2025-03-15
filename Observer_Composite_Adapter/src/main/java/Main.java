@@ -1,3 +1,5 @@
+import composite_folderNfile.File;
+import composite_folderNfile.Folder;
 import observer_coPhieu.ConcreteInvestor;
 import observer_coPhieu.ConcreteStock;
 import observer_coPhieu.Investor;
@@ -32,9 +34,31 @@ public class Main {
         task.setStatus("Hoan thanh");
     }
 
+    public static void CompositePattern() {
+        File file1 = new File("file1.txt");
+        File file2 = new File("file2.jpg");
+        File file3 = new File("file3.pdf");
+
+        Folder subFolder1 = new Folder("SubFolder1");
+        Folder subFolder2 = new Folder("SubFolder2");
+
+        // root
+        Folder rootFolder = new Folder("RootFolder");
+
+        subFolder1.add(file1);
+        subFolder1.add(file2);
+        subFolder2.add(file3);
+
+        rootFolder.add(subFolder1);
+        rootFolder.add(subFolder2);
+
+        rootFolder.display();
+    }
+
     public static void main(String[] args) {
 //        CoPhieu_ObserverPattern();
 
-        QLtrangThaiCV_ObserverPartern();
+//        QLtrangThaiCV_ObserverPartern();
+        CompositePattern();
     }
 }
