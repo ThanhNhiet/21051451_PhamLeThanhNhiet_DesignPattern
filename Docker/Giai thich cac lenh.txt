@@ -1,0 +1,93 @@
+1. docker --version
+Hiển thị phiên bản hiện tại của Docker.
+
+2. docker run hello-world
+Chạy một container Docker với image hello-world, mục đích kiểm tra xem Docker có hoạt động đúng không.
+
+3. docker pull nginx
+Tải image nginx từ Docker Hub về máy local.
+
+4. docker images
+Liệt kê tất cả các image hiện có trên hệ thống.
+
+5. docker run -d nginx
+Chạy container nginx trong chế độ nền (-d).
+có thể tiếp tục sử dụng terminal để thực hiện các công việc khác mà không bị "khóa" bởi quá trình đang chạy trong container.
+
+6. docker ps
+Liệt kê các container đang chạy.
+
+7. docker ps -a
+Liệt kê tất cả các container, kể cả những container đã dừng.
+
+8. docker logs <container_id>
+Hiển thị logs của container với ID tương ứng.
+
+9. docker exec -it <container_id> /bin/sh
+Mở một shell tương tác trong container đang chạy.
+
+10. docker stop <container_id>
+Dừng một container đang chạy.
+
+11. docker restart <container_id>
+Khởi động lại container đã dừng.
+
+12. docker rm <container_id>
+Xóa một container khỏi hệ thống.
+
+13. docker container prune
+Xóa tất cả các container đã dừng.
+
+14. docker rmi <image_id>
+Xóa một image khỏi hệ thống.
+
+15. docker image prune -a
+Xóa tất cả các image không còn được sử dụng trên hệ thống.
+
+16. docker run -d -p 8080:80 nginx
+Chạy container nginx trong chế độ nền và ánh xạ cổng 8080 của máy chủ đến cổng 80 của container.
+
+17. docker inspect <container_id>
+Hiển thị thông tin chi tiết về container, như IP, volumes, network settings...
+
+18. docker run -d -v mydata:/data nginx
+Chạy container nginx với volume mydata được mount vào thư mục /data của container.
+-v mydata:/data: Tạo một volume có tên mydata và mount nó vào thư mục /data trong container. Volume này giúp lưu trữ dữ liệu bên ngoài container, do đó nếu container bị xóa, dữ liệu trong volume sẽ vẫn được giữ lại.
+19. docker volume ls
+Liệt kê các volumes hiện có trên hệ thống Docker.
+
+20. docker volume prune
+Xóa tất cả các volume không còn sử dụng.
+
+21. docker run -d --name my_nginx nginx
+Chạy container nginx và gán tên cho container là my_nginx.
+
+22. docker stats
+Hiển thị tài nguyên sử dụng (CPU, memory) của các container đang chạy.
+
+23. docker network ls
+Liệt kê tất cả các mạng Docker hiện có.
+
+24. docker network create my_network
+Tạo một mạng Docker mới với tên my_network.
+
+25. docker run -d --network my_network --name my_container nginx
+Chạy container nginx và kết nối container này với mạng my_network.
+
+26. docker network connect my_network my_nginx
+Kết nối container my_nginx với mạng my_network.
+
+27. docker run -d -e MY_ENV=hello_world nginx
+Chạy container nginx và thiết lập biến môi trường MY_ENV với giá trị hello_world.
+
+28. docker logs -f my_nginx
+Xem logs của container my_nginx và theo dõi (follow) logs mới.
+
+29. COPY index.html /usr/share/nginx/html/index.html
+Sử dụng image cơ bản nginx và sao chép tệp index.html vào thư mục nginx đang phục vụ.
+
+30. docker build -t my_nginx_image .
+Tạo một image mới từ Dockerfile trong thư mục hiện tại và gán tên cho image là my_nginx_image.
+
+31. docker run -d -p 8080:80 my_nginx_image
+Chạy container từ image my_nginx_image, ánh xạ cổng 8080 trên máy chủ tới cổng 80 trong container.
