@@ -2,26 +2,29 @@ package com.example.orderservice.Client;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CustomerClient {
 
-    private final RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
-    public CustomerClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+    private static final String CUSTOMER_SERVICE_URL = "http://localhost:8080/customers/";
 
-    @CircuitBreaker(name = "customerService", fallbackMethod = "fallbackCustomer")
-    @Retry(name = "customerService")
+//    @CircuitBreaker(name = "customerService", fallbackMethod = "fallbackCustomer")
+//    @Retry(name = "customerService")
+    @Retry(name = "customerService", fallbackMethod = "fallbackCustomer")
     public String getCustomerName(Long customerId) {
-        return restTemplate.getForObject("http://localhost:8080/customers/" + customerId, String.class);
+        String url = CUSTOMER_SERVICE_URL + customerId;
+        return restTemplate.getForObject(url, String.class);
     }
 
     public String fallbackCustomer(Long customerId, Throwable t) {
-        return "Unknown-Customer";
+        return "Unknown Customer (fallback)";
     }
 }
+
 

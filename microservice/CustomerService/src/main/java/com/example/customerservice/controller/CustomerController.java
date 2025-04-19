@@ -2,6 +2,8 @@ package com.example.customerservice.controller;
 
 import com.example.customerservice.entity.Customer;
 import com.example.customerservice.service.CustomerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,4 +27,15 @@ public class CustomerController {
     public List<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
     }
+
+    @GetMapping("/{id}")
+    public Customer getCustomerById(@PathVariable Long id) {
+        return customerService.getCustomerById(id);
+    }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<String> getCustomerById(@PathVariable String id) {
+//        // Cố tình tạo lỗi để test retry
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Simulated failure");
+//    }
 }

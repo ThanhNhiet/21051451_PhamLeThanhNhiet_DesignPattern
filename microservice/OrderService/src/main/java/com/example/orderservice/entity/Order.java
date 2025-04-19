@@ -13,6 +13,7 @@ public class Order {
     private String customerId;
     private String productId;
     private int quantity;
+    private String note;
 
     public Order(String customerId, String productId, int quantity) {
         this.customerId = customerId;
@@ -51,5 +52,12 @@ public class Order {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getNote() {
+        return note;
+    }
+    public void setNote(String s) {
+        this.note = s;
     }
 }
